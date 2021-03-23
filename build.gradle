@@ -3,6 +3,9 @@ plugins {
 	id 'io.spring.dependency-management' version '1.0.11.RELEASE'
 	id 'java'
 	id 'pl.allegro.tech.build.axion-release' version '1.12.0'
+	id 'com.palantir.docker' version '0.25.0'
+    id 'com.palantir.docker-run' version '0.25.0'
+	
 	
 }
 
@@ -34,5 +37,14 @@ dependencies {
 test {
 useJUnitPlatform()
 }
+
+String imageName = "beker26/passeio:$version"
+
+docker {
+    name imageName
+    files "build/libs/${bootJar.archiveFileName.get()}"
+    buildArgs([JAR_FILE: bootJar.archiveFileName.get()])
+}
+
 
 project.version = scmVersion.version
