@@ -10,7 +10,7 @@ plugins {
 }
 
 group = 'com.br.passeio'
-version = '0.0.1-SNAPSHOT'
+version = '0.1.0-SNAPSHOT'
 sourceCompatibility = '1.8'
 
 repositories {
@@ -38,12 +38,19 @@ test {
 useJUnitPlatform()
 }
 
-String imageName = "beker26/passeio:$version"
+String imageName = "beker27/passeio:$version" 
 
 docker {
     name imageName
     files "build/libs/${bootJar.archiveFileName.get()}"
     buildArgs([JAR_FILE: bootJar.archiveFileName.get()])
+}
+
+dockerRun {
+    name project.name
+    image imageName
+    ports '8080:8080'
+    clean true
 }
 
 
