@@ -38,6 +38,7 @@ test {
 useJUnitPlatform()
 }
 
+
 String imageName = "beker27/passeio:$version" 
 
 docker {
